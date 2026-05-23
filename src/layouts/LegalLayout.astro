@@ -1,0 +1,182 @@
+---
+// LegalLayout — reading-optimized layout for /privacy/ and /terms/
+// pages. Narrower max-width than BaseLayout's 1120px (reading
+// comfort drops above ~70-75ch), generous line-height, anchored
+// section headings so a TOC works. Shares the same html shell
+// (lang/dir/meta/fonts) as BaseLayout.
+
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  lang: "en" | "ar";
+}
+
+const { title, description, lang } = Astro.props;
+const dir = lang === "ar" ? "rtl" : "ltr";
+const siteUrl = Astro.site?.toString() ?? "https://azmfit.co";
+const otherLangHref = lang === "en" ? "/ar/" : "/en/";
+const otherLangLabel = lang === "en" ? "العربية" : "English";
+const homeHref = `/${lang}/`;
+const homeLabel = lang === "en" ? "Back to home" : "العودة للرئيسية";
+---
+
+<!doctype html>
+<html lang={lang} dir={dir}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    {description ? <meta name="description" content={description} /> : null}
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- hreflang alternates so search engines know about both locales -->
+    <link rel="alternate" hreflang="en" href={`${siteUrl}/en/`} />
+    <link rel="alternate" hreflang="ar" href={`${siteUrl}/ar/`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/en/`} />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <header class="legal-header">
+      <div class="container header-inner">
+        <a href={homeHref} class="home-link">{homeLabel}</a>
+        <a href={otherLangHref} class="lang-toggle">{otherLangLabel}</a>
+      </div>
+    </header>
+
+    <main class="legal-main">
+      <article class="container legal-article">
+        <slot />
+      </article>
+    </main>
+
+    <footer class="legal-footer">
+      <div class="container footer-inner">
+        <p>© AzmFit</p>
+      </div>
+    </footer>
+
+    <style>
+      .legal-header {
+        border-bottom: 1px solid var(--hair);
+        padding: 16px 0;
+        background: var(--bone);
+      }
+
+      .header-inner {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+      .home-link,
+      .lang-toggle {
+        color: var(--ink-2);
+        font-size: 14px;
+        font-weight: 500;
+      }
+
+      .lang-toggle {
+        color: var(--accent);
+      }
+
+      .legal-main {
+        padding: 48px 0 96px;
+      }
+
+      .legal-article {
+        max-width: 720px;
+      }
+
+      /* Generous reading typography — longer body lines need more
+       * leading; section headings get extra room above for scanability. */
+      .legal-article :global(h1) {
+        font-family: var(--font-display);
+        font-size: clamp(28px, 4vw, 36px);
+        font-weight: 700;
+        line-height: 1.15;
+        letter-spacing: -0.015em;
+        color: var(--ink);
+        margin-bottom: 12px;
+      }
+
+      .legal-article :global(.legal-meta) {
+        color: var(--muted);
+        font-size: 14px;
+        margin-bottom: 48px;
+      }
+
+      .legal-article :global(h2) {
+        font-family: var(--font-display);
+        font-size: 22px;
+        font-weight: 600;
+        color: var(--ink);
+        margin-top: 56px;
+        margin-bottom: 12px;
+        scroll-margin-top: 96px;
+      }
+
+      .legal-article :global(h3) {
+        font-family: var(--font-display);
+        font-size: 16px;
+        font-weight: 600;
+        color: var(--ink);
+        margin-top: 24px;
+        margin-bottom: 8px;
+      }
+
+      .legal-article :global(p),
+      .legal-article :global(li) {
+        color: var(--ink-2);
+        font-size: 16px;
+        line-height: 1.7;
+        margin-bottom: 16px;
+      }
+
+      .legal-article :global(ul),
+      .legal-article :global(ol) {
+        padding-inline-start: 24px;
+        margin-bottom: 16px;
+      }
+
+      .legal-article :global(li) {
+        margin-bottom: 8px;
+      }
+
+      .legal-article :global(strong) {
+        color: var(--ink);
+        font-weight: 600;
+      }
+
+      .legal-article :global(.callout) {
+        background: var(--accent-soft);
+        border-radius: var(--radius-tile);
+        padding: 20px 24px;
+        margin: 32px 0;
+      }
+
+      .legal-article :global(.callout p) {
+        color: var(--ink);
+        margin-bottom: 0;
+      }
+
+      .legal-footer {
+        border-top: 1px solid var(--hair);
+        padding: 32px 0;
+      }
+
+      .footer-inner p {
+        color: var(--faint);
+        font-size: 13px;
+      }
+    </style>
+  </body>
+</html>

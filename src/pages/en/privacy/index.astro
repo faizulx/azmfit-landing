@@ -1,0 +1,189 @@
+---
+import LegalLayout from "../../../layouts/LegalLayout.astro";
+---
+
+<LegalLayout
+  lang="en"
+  title="Privacy Policy — AzmFit"
+  description="How AzmFit collects, uses, and protects your data."
+>
+  <h1>Privacy Policy</h1>
+  <p class="legal-meta">Last updated: [DATE]</p>
+
+  <div class="callout">
+    <p>
+      <strong>The short version:</strong> AzmFit collects only what's
+      needed to make the app work — your account, what you log, and
+      (with your permission) Apple Health data. We don't sell your data,
+      we don't share it with advertisers, and you can delete it any
+      time from inside the app.
+    </p>
+  </div>
+
+  <h2>1. Who we are</h2>
+  <p>
+    AzmFit is operated by <strong>[COMPANY_LEGAL_NAME]</strong>
+    ("AzmFit," "we," "us"). This policy explains what data we collect
+    when you use the AzmFit iOS app or visit azmfit.co, how we use it,
+    and your rights over it.
+  </p>
+  <p>
+    If you have questions, contact us at
+    <strong>[CONTACT_EMAIL]</strong>.
+  </p>
+
+  <h2>2. Information we collect</h2>
+
+  <h3>Account information</h3>
+  <p>
+    When you create an account, we collect your email address, a
+    hashed password, your name (if you provide one), and your
+    preferred language.
+  </p>
+
+  <h3>Profile information you enter</h3>
+  <p>
+    Your date of birth, biological sex, height, weight, activity
+    level, and fitness goal — used to compute personalized calorie and
+    macro targets. You can change or delete any of these from Settings.
+  </p>
+
+  <h3>Workout and meal logs</h3>
+  <p>
+    Every workout you record (exercises, sets, weights, reps, notes)
+    and every meal you log (food items, quantities, macros) is stored
+    so it can appear in your history, charts, and Fitness Level.
+  </p>
+
+  <h3>Apple Health data (with your permission)</h3>
+  <p>
+    If you grant Apple Health access, we read steps, active energy,
+    sleep duration and stages, and resting heart rate. This data
+    syncs into your AzmFit account so it can power the Fitness Level
+    score and weekly digest. We do not write back to Apple Health
+    without your explicit action.
+  </p>
+
+  <h3>Subscription information</h3>
+  <p>
+    If you subscribe to Personal Pro or Coach Pro, we receive a
+    transaction identifier from Apple via RevenueCat (our subscription
+    management provider). We never see or store your payment card
+    details — those are handled entirely by Apple.
+  </p>
+
+  <h3>Coaching data (Coach Pro users only)</h3>
+  <p>
+    If you connect with a coach inside the app, that coach can see
+    your workouts, meals, weight, and other logs you choose to share.
+    Coaches can leave notes on your sessions. You can end a coaching
+    relationship from Settings at any time, which immediately revokes
+    the coach's access.
+  </p>
+
+  <h3>Device and usage information</h3>
+  <p>
+    We collect basic device information (OS version, app version,
+    language, region) and anonymous usage events (e.g., which screens
+    you open) to diagnose crashes and improve the product. We do not
+    track you across other apps or websites.
+  </p>
+
+  <h2>3. How we use your information</h2>
+  <ul>
+    <li>To provide the core features: log workouts and meals, render
+      charts, compute your Fitness Level, generate weekly digests.</li>
+    <li>To process subscriptions and enforce tier limits (e.g., AI
+      quota, custom food count).</li>
+    <li>To send AI-generated weekly digests (you can disable this in
+      Settings).</li>
+    <li>To diagnose bugs and improve app performance.</li>
+    <li>To respond to your support requests.</li>
+  </ul>
+
+  <h2>4. AI-powered features</h2>
+  <p>
+    AzmFit uses OpenAI to power the AI quick-log feature and the
+    weekly digest. When you use these features, the relevant text
+    (e.g., your meal description, or a summary of your weekly stats)
+    is sent to OpenAI's API for processing. OpenAI does not retain
+    this data for training, per their API data usage policy. We do
+    not send your personal identifiers (name, email) along with these
+    requests.
+  </p>
+
+  <h2>5. How we share your information</h2>
+  <p>We share data only with the following categories of recipients:</p>
+  <ul>
+    <li>
+      <strong>Service providers</strong> who help us run the app:
+      Supabase (backend hosting and database), RevenueCat (subscription
+      management), OpenAI (AI features), Apple (App Store delivery and
+      payment).
+    </li>
+    <li>
+      <strong>Your coach</strong>, if you have an active coaching
+      relationship inside the app (and only the data they can see in
+      their coach view).
+    </li>
+    <li>
+      <strong>Legal authorities</strong>, if required by valid legal
+      process (we will challenge requests we believe are overly broad).
+    </li>
+  </ul>
+  <p>
+    <strong>We never sell your data, share it with advertisers, or
+    use it to build targeted-ad profiles.</strong>
+  </p>
+
+  <h2>6. Where your data is stored</h2>
+  <p>
+    AzmFit data is stored in Supabase's [REGION] region. By using the
+    app, you consent to this storage location. We protect data in
+    transit with TLS and at rest with industry-standard encryption.
+  </p>
+
+  <h2>7. How long we keep your data</h2>
+  <p>
+    We retain your account and logs for as long as your account is
+    active. When you delete your account from Settings, we delete
+    your personal data within 30 days, except where retention is
+    required by law (e.g., financial records for tax purposes).
+  </p>
+
+  <h2>8. Your rights</h2>
+  <p>You have the right to:</p>
+  <ul>
+    <li><strong>Access</strong> — request a copy of your data.</li>
+    <li><strong>Correct</strong> — fix any inaccurate information
+      (most fields are editable directly in the app).</li>
+    <li><strong>Delete</strong> — delete your account and all
+      associated data from Settings → Account → Delete Account.</li>
+    <li><strong>Export</strong> — request a portable copy of your
+      data by emailing [CONTACT_EMAIL].</li>
+    <li><strong>Withdraw consent</strong> — revoke Apple Health
+      access from iOS Settings → Health → Sharing → AzmFit.</li>
+  </ul>
+
+  <h2>9. Children's privacy</h2>
+  <p>
+    AzmFit is not intended for children under 13. We do not knowingly
+    collect data from anyone under 13. If you believe a child has
+    created an account, contact us at [CONTACT_EMAIL] and we will
+    delete it.
+  </p>
+
+  <h2>10. Changes to this policy</h2>
+  <p>
+    We may update this policy from time to time. Material changes
+    will be announced in-app at least 30 days before they take effect.
+    The "Last updated" date at the top of this page reflects the most
+    recent change.
+  </p>
+
+  <h2>11. Contact</h2>
+  <p>
+    Questions, requests, or concerns? Email us at
+    <strong>[CONTACT_EMAIL]</strong>.
+  </p>
+</LegalLayout>
