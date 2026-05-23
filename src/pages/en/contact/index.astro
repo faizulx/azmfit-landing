@@ -1,0 +1,137 @@
+---
+import LegalLayout from "../../../layouts/LegalLayout.astro";
+
+// Contact form action URL — Formspree endpoint. Sign up at
+// https://formspree.io, create a form, and paste the action URL
+// below. Without this set, the form won't actually deliver.
+// Format: https://formspree.io/f/xxxxxxxx
+const FORMSPREE_ACTION = "https://formspree.io/f/YOUR_FORM_ID_HERE";
+---
+
+<LegalLayout
+  lang="en"
+  title="Contact — AzmFit"
+  description="Get in touch with the AzmFit team."
+>
+  <h1>Contact us</h1>
+  <p class="legal-meta">
+    Have a question, feature request, privacy concern, or just want
+    to say hi? Fill in the form and we'll get back to you.
+  </p>
+
+  <form
+    class="contact-form"
+    action={FORMSPREE_ACTION}
+    method="POST"
+  >
+    <label class="field">
+      <span class="label">Name</span>
+      <input type="text" name="name" required autocomplete="name" />
+    </label>
+
+    <label class="field">
+      <span class="label">Email</span>
+      <input type="email" name="email" required autocomplete="email" />
+    </label>
+
+    <label class="field">
+      <span class="label">Subject</span>
+      <select name="subject" required>
+        <option value="">Select a topic…</option>
+        <option value="General">General question</option>
+        <option value="Support">Support / bug report</option>
+        <option value="Privacy">Privacy / data request</option>
+        <option value="Coaching">Coaching</option>
+        <option value="Press">Press / partnership</option>
+        <option value="Other">Other</option>
+      </select>
+    </label>
+
+    <label class="field">
+      <span class="label">Message</span>
+      <textarea name="message" rows="6" required></textarea>
+    </label>
+
+    {/* Honeypot — bots tend to fill every field. If this hidden
+        field comes back populated, Formspree drops the submission. */}
+    <input
+      type="text"
+      name="_gotcha"
+      style="display:none"
+      tabindex="-1"
+      autocomplete="off"
+    />
+
+    {/* Optional: redirect to a "sent" page after submit. Leave the
+        default Formspree thank-you page for now; switch later if you
+        want a custom one. */}
+
+    <button type="submit" class="submit-btn">Send message</button>
+  </form>
+
+  <style>
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      font-family: inherit;
+      font-size: 16px;
+      color: var(--ink);
+      background: var(--bone-elevated);
+      border: 1px solid var(--hair);
+      border-radius: var(--radius-tile);
+      padding: 14px 16px;
+      transition: border-color 160ms ease;
+      width: 100%;
+    }
+
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 140px;
+      line-height: 1.55;
+    }
+
+    .submit-btn {
+      align-self: flex-start;
+      background: var(--accent);
+      color: var(--on-accent);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: var(--radius-pill);
+      transition: background 160ms ease;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      background: var(--accent-dim);
+    }
+  </style>
+</LegalLayout>

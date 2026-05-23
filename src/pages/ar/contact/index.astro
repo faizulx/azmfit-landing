@@ -1,0 +1,130 @@
+---
+import LegalLayout from "../../../layouts/LegalLayout.astro";
+
+// Same Formspree endpoint as the EN form — one mailbox for both
+// locales. Sign up at https://formspree.io and paste the URL here.
+const FORMSPREE_ACTION = "https://formspree.io/f/YOUR_FORM_ID_HERE";
+---
+
+<LegalLayout
+  lang="ar"
+  title="تواصل معنا — عزم"
+  description="تواصل مع فريق عزم."
+>
+  <h1>تواصل معنا</h1>
+  <p class="legal-meta">
+    لديك سؤال، اقتراح ميزة، استفسار خصوصية، أو تحب فقط أن تلقي
+    التحية؟ املأ النموذج وسنرد عليك.
+  </p>
+
+  <form
+    class="contact-form"
+    action={FORMSPREE_ACTION}
+    method="POST"
+  >
+    <label class="field">
+      <span class="label">الاسم</span>
+      <input type="text" name="name" required autocomplete="name" />
+    </label>
+
+    <label class="field">
+      <span class="label">البريد الإلكتروني</span>
+      <input type="email" name="email" required autocomplete="email" />
+    </label>
+
+    <label class="field">
+      <span class="label">الموضوع</span>
+      <select name="subject" required>
+        <option value="">اختر موضوعًا…</option>
+        <option value="General">سؤال عام</option>
+        <option value="Support">دعم / بلاغ عطل</option>
+        <option value="Privacy">خصوصية / طلب بيانات</option>
+        <option value="Coaching">تدريب</option>
+        <option value="Press">صحافة / شراكة</option>
+        <option value="Other">أخرى</option>
+      </select>
+    </label>
+
+    <label class="field">
+      <span class="label">الرسالة</span>
+      <textarea name="message" rows="6" required></textarea>
+    </label>
+
+    {/* Honeypot — same anti-spam trap as the EN form */}
+    <input
+      type="text"
+      name="_gotcha"
+      style="display:none"
+      tabindex="-1"
+      autocomplete="off"
+    />
+
+    <button type="submit" class="submit-btn">إرسال الرسالة</button>
+  </form>
+
+  <style>
+    .contact-form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      margin-top: 40px;
+    }
+
+    .field {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+
+    .label {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--ink);
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .contact-form input,
+    .contact-form select,
+    .contact-form textarea {
+      font-family: inherit;
+      font-size: 16px;
+      color: var(--ink);
+      background: var(--bone-elevated);
+      border: 1px solid var(--hair);
+      border-radius: var(--radius-tile);
+      padding: 14px 16px;
+      transition: border-color 160ms ease;
+      width: 100%;
+    }
+
+    .contact-form input:focus,
+    .contact-form select:focus,
+    .contact-form textarea:focus {
+      outline: none;
+      border-color: var(--accent);
+    }
+
+    .contact-form textarea {
+      resize: vertical;
+      min-height: 140px;
+      line-height: 1.55;
+    }
+
+    .submit-btn {
+      align-self: flex-start;
+      background: var(--accent);
+      color: var(--on-accent);
+      font-weight: 600;
+      font-size: 15px;
+      padding: 14px 28px;
+      border-radius: var(--radius-pill);
+      transition: background 160ms ease;
+      margin-top: 8px;
+    }
+
+    .submit-btn:hover {
+      background: var(--accent-dim);
+    }
+  </style>
+</LegalLayout>
