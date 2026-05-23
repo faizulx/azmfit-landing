@@ -1,0 +1,188 @@
+---
+// Features — 4 pillar cards (Train / Eat / Progress / Insight) +
+// a featured wide card for coaching below the grid.
+//
+// Copy principle: lead with the user's outcome, not the technical
+// implementation. "Every workout knows your last one" beats
+// "AzmFit tracks progressive overload across sessions." Concrete
+// examples are fine when they serve the value claim.
+
+interface Props {
+  lang: "en" | "ar";
+}
+
+const { lang } = Astro.props;
+
+const copy = {
+  en: {
+    eyebrow: "What's inside",
+    title: "Built around what actually moves the needle",
+    items: [
+      {
+        title: "Train with momentum",
+        body: "Every workout knows your last one. AzmFit suggests the right weight, tracks every set, and keeps you moving forward — without you having to remember anything.",
+      },
+      {
+        title: "Log meals in seconds",
+        body: "Skip the database scroll. Just type what you ate — “two eggs and toast” — and your meal is logged with the right calories and macros.",
+      },
+      {
+        title: "Know if you're getting fitter",
+        body: "Stop guessing. Your Fitness Level — one number that adapts to your goal — tells you exactly where you stand and what to work on next.",
+      },
+      {
+        title: "Your week, made clear",
+        body: "Every Sunday, AzmFit summarizes your week — what worked, what didn't, what to change. Clarity without spreadsheets.",
+      },
+    ],
+    coaching: {
+      eyebrow: "Optional · 1:1",
+      title: "Want a real coach? Get one.",
+      body: "Pair with a coach inside the app. They build your programs, review your weeks, and adjust as you go. You both see the same data — no screenshots, no back-and-forth.",
+    },
+  },
+  ar: {
+    eyebrow: "ما الذي يقدمه التطبيق؟",
+    title: "مبنيٌّ حول ما يصنع فرقًا فعلًا",
+    items: [
+      {
+        title: "تمرَّن باستمرار",
+        body: "كل تمرين يعرف الذي قبله. عزم يقترح الوزن المناسب، ويتتبَّع كل مجموعة، ويُبقيك في تقدُّم — دون أن تحتاج لتتذكَّر شيئًا.",
+      },
+      {
+        title: "سجِّل وجباتك في ثوانٍ",
+        body: "لا حاجة للبحث في القوائم. اكتب ما أكلت — “بيضتان وتوست” — والوجبة تُسجَّل بسعراتها وماكروزها الصحيحة.",
+      },
+      {
+        title: "اعرف إن كنت تتحسَّن",
+        body: "كفى تخمينًا. مستوى لياقتك — رقم واحد يتكيَّف مع هدفك — يخبرك بدقّة أين أنت وما الذي يحتاج عملًا.",
+      },
+      {
+        title: "أسبوعك بوضوح",
+        body: "كل أحد، عزم يُلخِّص لك أسبوعك — ما الذي نجح، وما الذي لم ينجح، وما الذي يجب تغييره. وضوح دون جداول.",
+      },
+    ],
+    coaching: {
+      eyebrow: "اختياري · فردي",
+      title: "تريد مدرّبًا حقيقيًا؟ احصل عليه.",
+      body: "اربط حسابك بمدرّب داخل التطبيق. يبني برامجك، يراجع أسابيعك، ويعدّل أولًا بأول. كلاكما يرى البيانات ذاتها — بلا لقطات شاشة، وبلا تبادل رسائل.",
+    },
+  },
+}[lang];
+---
+
+<section class="features" id="features">
+  <div class="container">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 class="section-title">{copy.title}</h2>
+
+    <div class="grid">
+      {
+        copy.items.map((item) => (
+          <article class="card">
+            <h3 class="card-title">{item.title}</h3>
+            <p class="card-body">{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    {/* Coaching — featured wide card below the 2×2 grid. Different
+        visual treatment (accent-soft border, subtle bg tint) so it
+        reads as the optional pairing layer, not a fifth peer pillar. */}
+    <article class="card-coaching">
+      <p class="card-coaching-eyebrow">{copy.coaching.eyebrow}</p>
+      <h3 class="card-title">{copy.coaching.title}</h3>
+      <p class="card-body">{copy.coaching.body}</p>
+    </article>
+  </div>
+</section>
+
+<style>
+  .features {
+    padding: 96px 0;
+  }
+
+  .eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    max-width: 700px;
+    margin-bottom: 56px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    margin-bottom: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .card {
+    background: var(--bone-elevated);
+    border: 1px solid var(--hair);
+    border-radius: var(--radius-card);
+    padding: 28px;
+    transition: border-color 160ms ease;
+  }
+
+  .card:hover {
+    border-color: var(--accent-soft);
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .card-body {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  /* Coaching — featured wide card. Slightly tinted bg + accent-soft
+   * border to differentiate it from the four pillar cards. Adds an
+   * "Optional · 1:1" eyebrow so a visitor scanning doesn't read it
+   * as "you must have a coach to use this." */
+  .card-coaching {
+    background: var(--accent-soft);
+    border: 1px solid var(--accent-soft);
+    border-radius: var(--radius-card);
+    padding: 32px;
+  }
+
+  .card-coaching .card-title {
+    font-size: 22px;
+  }
+
+  .card-coaching .card-body {
+    color: var(--ink-2);
+    max-width: 640px;
+  }
+
+  .card-coaching-eyebrow {
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--accent-dim);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+</style>

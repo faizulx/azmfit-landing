@@ -1,0 +1,113 @@
+---
+// Footer — brand line, language toggle, secondary links.
+//
+// Language toggle uses href to swap locales rather than a runtime
+// preference. Search engines see clean per-locale URLs and remember
+// the user's choice through normal browser history.
+
+interface Props {
+  lang: "en" | "ar";
+}
+
+const { lang } = Astro.props;
+
+const copy = {
+  en: {
+    brand: "AzmFit",
+    tagline: "Train smarter. Eat better. Track everything.",
+    nav: {
+      privacy: "Privacy",
+      terms: "Terms",
+      contact: "Contact",
+    },
+    langToggle: { label: "العربية", href: "/ar/" },
+    rights: "© AzmFit. All rights reserved.",
+  },
+  ar: {
+    brand: "عزم",
+    tagline: "تمرَّن بذكاء. تغذَّ بوعي. تتبَّع كل شيء.",
+    nav: {
+      privacy: "الخصوصية",
+      terms: "الشروط",
+      contact: "تواصل",
+    },
+    langToggle: { label: "English", href: "/en/" },
+    rights: "© عزم. جميع الحقوق محفوظة.",
+  },
+}[lang];
+---
+
+<footer class="footer">
+  <div class="container footer-inner">
+    <div class="brand">
+      <p class="brand-name">{copy.brand}</p>
+      <p class="brand-tagline">{copy.tagline}</p>
+    </div>
+
+    <nav class="nav" aria-label="Footer">
+      <a href="#privacy">{copy.nav.privacy}</a>
+      <a href="#terms">{copy.nav.terms}</a>
+      <a href="#contact">{copy.nav.contact}</a>
+      <a class="lang-toggle" href={copy.langToggle.href}>{copy.langToggle.label}</a>
+    </nav>
+  </div>
+
+  <div class="container">
+    <p class="rights">{copy.rights}</p>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    border-top: 1px solid var(--hair);
+    padding: 56px 0 32px;
+    background: var(--bone);
+  }
+
+  .footer-inner {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: 32px;
+    flex-wrap: wrap;
+    margin-bottom: 40px;
+  }
+
+  .brand-name {
+    font-family: var(--font-display);
+    font-weight: 600;
+    font-size: 18px;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .brand-tagline {
+    color: var(--muted);
+    font-size: 14px;
+    max-width: 360px;
+  }
+
+  .nav {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .nav a {
+    color: var(--ink-2);
+    font-size: 14px;
+  }
+
+  .lang-toggle {
+    border-inline-start: 1px solid var(--hair);
+    padding-inline-start: 24px;
+    color: var(--accent);
+    font-weight: 500;
+  }
+
+  .rights {
+    color: var(--faint);
+    font-size: 13px;
+  }
+</style>

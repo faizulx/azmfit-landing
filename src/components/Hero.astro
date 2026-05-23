@@ -1,0 +1,131 @@
+---
+// Hero — top fold. Logo + headline + tagline + App Store CTA.
+// Placeholder copy; the user will refine after the scaffold ships.
+
+interface Props {
+  lang: "en" | "ar";
+}
+
+const { lang } = Astro.props;
+
+const copy = {
+  en: {
+    headline: "Train smarter. Eat better. Track everything.",
+    tagline:
+      "Your fitness companion. Workouts, meals, coaching, and progress — together in one app.",
+    cta: "Download on the App Store",
+    secondaryCta: "Learn more →",
+    logoAlt: "AzmFit",
+  },
+  ar: {
+    headline: "تمرَّن بذكاء. تغذَّ بوعي. تتبَّع كل شيء.",
+    tagline:
+      "رفيق لياقتك. التمارين والوجبات والتدريب والتقدم — في تطبيق واحد.",
+    cta: "حمِّل التطبيق",
+    secondaryCta: "← اعرف أكثر",
+    logoAlt: "عزم",
+  },
+}[lang];
+---
+
+<section class="hero">
+  <div class="container hero-inner">
+    {/* Brand wordmark — single asset across light + dark modes.
+        Sized large to anchor the hero, scales down on narrow
+        viewports via clamp() in the .logo CSS below. */}
+    <img
+      class="logo"
+      src="/azm-logo-dark-transparent.png"
+      alt={copy.logoAlt}
+    />
+    <h1 class="headline">{copy.headline}</h1>
+    <p class="tagline">{copy.tagline}</p>
+
+    <div class="cta-row">
+      <!-- App Store badge — replace href with the real listing URL
+           after the app is approved. Placeholder uses the Apple-
+           hosted SVG. -->
+      <a class="cta-primary" href="#" aria-label={copy.cta}>
+        <span>{copy.cta}</span>
+      </a>
+      <a class="cta-secondary" href="#features">{copy.secondaryCta}</a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .hero {
+    padding: 96px 0 80px;
+    background: linear-gradient(
+      180deg,
+      var(--bone) 0%,
+      var(--bone-container) 100%
+    );
+  }
+
+  .hero-inner {
+    text-align: center;
+    max-width: 760px;
+  }
+
+  /* Brand wordmark — sized large to anchor the hero. The PNG has
+   * transparent padding around the tally marks that visually adds
+   * to the gap with the headline below, so we negate it with a
+   * negative bottom margin instead of leaving positive whitespace.
+   * Net effect: bigger mark, tighter rhythm. */
+  .logo {
+    display: inline-block;
+    height: clamp(200px, 28vw, 320px);
+    width: auto;
+    margin-bottom: -72px;
+  }
+
+  .headline {
+    font-family: var(--font-display);
+    font-size: clamp(36px, 6vw, 60px);
+    font-weight: 700;
+    line-height: 1.08;
+    letter-spacing: -0.02em;
+    color: var(--ink);
+    margin-bottom: 24px;
+  }
+
+  .tagline {
+    font-size: clamp(16px, 2vw, 19px);
+    color: var(--muted);
+    max-width: 580px;
+    margin: 0 auto 40px;
+    line-height: 1.5;
+  }
+
+  .cta-row {
+    display: flex;
+    gap: 16px;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+  }
+
+  .cta-primary {
+    display: inline-flex;
+    align-items: center;
+    background: var(--accent);
+    color: var(--on-accent);
+    padding: 14px 28px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 15px;
+    transition: background 160ms ease;
+  }
+
+  .cta-primary:hover {
+    background: var(--accent-dim);
+    text-decoration: none;
+  }
+
+  .cta-secondary {
+    color: var(--ink);
+    font-weight: 500;
+    font-size: 15px;
+  }
+</style>

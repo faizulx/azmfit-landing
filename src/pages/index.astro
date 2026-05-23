@@ -1,0 +1,37 @@
+---
+// Root index — language-aware redirect. We can't run JS during static
+// generation for Accept-Language, so we do both:
+//   1. Meta-refresh fallback that points to /en/ (default locale).
+//   2. Tiny inline script that reads navigator.language and swaps to
+//      /ar/ if the browser prefers Arabic.
+//
+// Net effect: GH Pages serves index.html instantly, the meta-refresh
+// kicks in if JS is disabled, otherwise the user lands on whichever
+// locale matches their browser preference. SEO is unaffected — both
+// /en/ and /ar/ have proper hreflang alternates in BaseLayout.
+---
+
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AzmFit</title>
+    <link rel="alternate" hreflang="en" href="/en/" />
+    <link rel="alternate" hreflang="ar" href="/ar/" />
+    <link rel="alternate" hreflang="x-default" href="/en/" />
+    <meta http-equiv="refresh" content="0; url=/en/" />
+    <script is:inline>
+      const lang = (navigator.language || "en").toLowerCase();
+      const target = lang.startsWith("ar") ? "/ar/" : "/en/";
+      // Replace so this redirect doesn't pollute the back-button stack.
+      window.location.replace(target);
+    </script>
+  </head>
+  <body>
+    <p>
+      Redirecting to <a href="/en/">AzmFit</a> /
+      <a href="/ar/">عزم</a>…
+    </p>
+  </body>
+</html>

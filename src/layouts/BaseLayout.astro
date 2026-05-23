@@ -1,0 +1,62 @@
+---
+// BaseLayout — single HTML shell shared by /en/ and /ar/ pages.
+//
+// Sets `<html lang>` + `dir` per the locale so Arabic flips RTL
+// without a runtime check. Pulls in the brand-token CSS once, plus
+// the two Google Fonts the app's typography stack uses (Inter for
+// Latin, Noto Sans Arabic for ar-SA). Meta tags + favicons live here
+// so every page inherits them — children just pass `title` + an
+// optional `description`.
+
+import "../styles/global.css";
+
+interface Props {
+  title: string;
+  description?: string;
+  lang: "en" | "ar";
+}
+
+const { title, description, lang } = Astro.props;
+const dir = lang === "ar" ? "rtl" : "ltr";
+
+// Open Graph image — used by social previews. Place a 1200×630 PNG
+// at /public/og-image.png; the path here resolves at deploy time.
+const ogImage = "/og-image.png";
+const siteUrl = Astro.site?.toString() ?? "https://azmfit.github.io";
+---
+
+<!doctype html>
+<html lang={lang} dir={dir}>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="generator" content={Astro.generator} />
+    <title>{title}</title>
+    {description ? <meta name="description" content={description} /> : null}
+
+    <link rel="icon" type="image/png" href="/favicon.png" />
+
+    <!-- Open Graph / Twitter -->
+    <meta property="og:title" content={title} />
+    {description ? <meta property="og:description" content={description} /> : null}
+    <meta property="og:image" content={`${siteUrl}${ogImage}`} />
+    <meta property="og:type" content="website" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- hreflang alternates so search engines know about both locales -->
+    <link rel="alternate" hreflang="en" href={`${siteUrl}/en/`} />
+    <link rel="alternate" hreflang="ar" href={`${siteUrl}/ar/`} />
+    <link rel="alternate" hreflang="x-default" href={`${siteUrl}/en/`} />
+
+    <!-- Inter (Latin) + Noto Sans Arabic, preconnect for handshake savings -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Noto+Sans+Arabic:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+  </head>
+  <body>
+    <slot />
+  </body>
+</html>

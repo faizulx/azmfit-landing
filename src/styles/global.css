@@ -1,0 +1,138 @@
+/* AzmFit landing — brand tokens + base styles.
+ *
+ * Tokens mirror `lib/theme/themes.ts` from the app exactly (bone v3.1
+ * lightness, ink for dark, cobalt as accent, rust for destructive)
+ * so the landing reads as the same brand identity. Light mode is the
+ * paper-bone field; dark mode (Ink) is the brand default — same as
+ * the app, dark wins on systems set to dark.
+ */
+
+:root {
+  /* Light mode — bone field, ink type, cobalt accent */
+  --bone: #fbf9f4;
+  --bone-elevated: #ffffff;
+  --bone-container: #f5f1ea;
+  --hair: #e0dad0;
+  --ink: #262320;
+  --ink-2: #494540;
+  --muted: #7c7670;
+  --faint: #b0aaa3;
+  --accent: #2858b8;
+  --accent-dim: #204698;
+  --accent-soft: #dee7f6;
+  --on-accent: #ffffff;
+  --error: #b04f2a;
+
+  /* Typography */
+  --font-sans:
+    "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+  --font-arabic:
+    "Noto Sans Arabic", "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-display: "Inter", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  /* Layout */
+  --max-width: 1120px;
+  --radius-card: 22px;
+  --radius-tile: 16px;
+  --radius-pill: 9999px;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    /* Dark mode (Ink) — brand default */
+    --bone: #211f1c;
+    --bone-elevated: #1a1816;
+    --bone-container: #2d2a26;
+    --hair: #44403c;
+    --ink: #f6f4f0;
+    --ink-2: #d5d1cc;
+    --muted: #94908c;
+    --faint: #5c5854;
+    --accent: #739ce2;
+    --accent-dim: #5c86d2;
+    --accent-soft: #283551;
+    --on-accent: #211f1c;
+    --error: #dc825a;
+  }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  background: var(--bone);
+  color: var(--ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+}
+
+html[lang="ar"] {
+  font-family: var(--font-arabic);
+}
+
+body {
+  background: var(--bone);
+  color: var(--ink);
+  line-height: 1.55;
+  font-size: 16px;
+  min-height: 100vh;
+}
+
+a {
+  color: var(--accent);
+  text-decoration: none;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+img,
+svg {
+  display: block;
+  max-width: 100%;
+  height: auto;
+}
+
+button {
+  font-family: inherit;
+  cursor: pointer;
+  border: none;
+  background: none;
+  color: inherit;
+}
+
+::selection {
+  background: var(--accent-soft);
+  color: var(--accent-dim);
+}
+
+/* Layout — single container width across sections so the editorial
+ * rhythm holds from hero to footer. */
+.container {
+  width: 100%;
+  max-width: var(--max-width);
+  margin-inline: auto;
+  padding-inline: 24px;
+}
+
+@media (min-width: 768px) {
+  .container {
+    padding-inline: 40px;
+  }
+}
+
+/* Eyebrow — small uppercase tracking-wide label used across sections.
+ * Matches the app's `text-[10px] tracking-editorial-wide uppercase`. */
+.eyebrow {
+  font-size: 11px;
+  font-weight: 500;
+  color: var(--muted);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
