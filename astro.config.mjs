@@ -18,8 +18,7 @@ import { defineConfig } from "astro/config";
 // `<html>` for the `ar` locale.
 
 export default defineConfig({
-  site: "https://azmfit.github.io",
-  // base: "/azmfit-landing", // uncomment when serving from a project repo without a custom domain
+  site: "https://azmfit.co",
   i18n: {
     defaultLocale: "en",
     locales: ["en", "ar"],
