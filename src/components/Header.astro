@@ -1,0 +1,107 @@
+---
+// Header — slim top bar shared across locales. Text wordmark on the
+// inline-start, a Pricing anchor + the Coach Studio login on the
+// inline-end. The login points at the live web app (app.azmfit.co);
+// it opens in a new tab so the marketing page stays put.
+//
+// Logical properties throughout so the bar mirrors cleanly in RTL.
+
+interface Props {
+  lang: "en" | "ar";
+}
+
+const { lang } = Astro.props;
+
+// Live Coach Studio web app — the product being sold.
+const COACH_APP_URL = "https://app.azmfit.co";
+
+const copy = {
+  en: {
+    brand: "AzmFit",
+    pricing: "Pricing",
+    login: "Coach login",
+  },
+  ar: {
+    brand: "عزم",
+    pricing: "الأسعار",
+    login: "دخول المدربين",
+  },
+}[lang];
+---
+
+<header class="header">
+  <div class="container header-inner">
+    <a class="brand" href={`/${lang}/`}>{copy.brand}</a>
+    <nav class="nav" aria-label={lang === "ar" ? "رئيسية" : "Primary"}>
+      <a class="nav-link" href="#pricing">{copy.pricing}</a>
+      <a
+        class="nav-cta"
+        href={COACH_APP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {copy.login}
+      </a>
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
+    /* Solid fallback first; translucent blur where color-mix is supported. */
+    background: var(--bone);
+    background: color-mix(in srgb, var(--bone) 82%, transparent);
+    backdrop-filter: saturate(140%) blur(12px);
+    -webkit-backdrop-filter: saturate(140%) blur(12px);
+    border-bottom: 1px solid var(--hair);
+  }
+
+  .header-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 60px;
+  }
+
+  .brand {
+    font-family: var(--font-display);
+    font-weight: 700;
+    font-size: 18px;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+  }
+
+  .brand:hover {
+    text-decoration: none;
+  }
+
+  .nav {
+    display: flex;
+    align-items: center;
+    gap: 24px;
+  }
+
+  .nav-link {
+    color: var(--ink-2);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .nav-cta {
+    background: var(--accent);
+    color: var(--on-accent);
+    padding: 9px 18px;
+    border-radius: var(--radius-pill);
+    font-size: 14px;
+    font-weight: 600;
+    transition: background 160ms ease;
+  }
+
+  .nav-cta:hover {
+    background: var(--accent-dim);
+    text-decoration: none;
+  }
+</style>

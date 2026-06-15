@@ -1,0 +1,292 @@
+---
+// Pricing — the Coach Studio SaaS, priced in three client-count
+// bundles. The client mobile app is free; coaches pay for the studio,
+// and the only axis that changes between tiers is how many active
+// clients the roster allows.
+//
+// Prices live in the TIERS array below (per month). Currency + billing
+// period are set in `copy` — change them in one place.
+
+interface Props {
+  lang: "en" | "ar";
+}
+
+const { lang } = Astro.props;
+
+const COACH_APP_URL = "https://app.azmfit.co";
+
+// Single source of truth for the bundles. `price` is per month.
+const TIERS = [
+  { key: "starter", clients: 5, price: 99, popular: false },
+  { key: "growth", clients: 10, price: 179, popular: true },
+  { key: "studio", clients: 20, price: 299, popular: false },
+] as const;
+
+const copy = {
+  en: {
+    eyebrow: "Pricing",
+    title: "Pricing that grows with your roster",
+    subtitle:
+      "Your clients use the app for free — you only pay for the studio. Pick the bundle that fits how many clients you coach.",
+    currency: "SAR",
+    per: "/mo",
+    popular: "Most popular",
+    cta: "Get started",
+    names: { starter: "Starter", growth: "Growth", studio: "Studio" },
+    clients: {
+      starter: "Up to 5 active clients",
+      growth: "Up to 10 active clients",
+      studio: "Up to 20 active clients",
+    },
+    features: [
+      "Unlimited programs & routines",
+      "AI weekly digest per client",
+      "Client recovery monitoring",
+      "1:1 messaging & coach notes",
+      "Your clients' app is always free",
+    ],
+  },
+  ar: {
+    eyebrow: "الأسعار",
+    title: "أسعار تكبر مع عدد متدربينك",
+    subtitle:
+      "متدربينك يستخدمون التطبيق مجانًا — تدفع فقط مقابل الاستوديو. اختر الباقة المناسبة لعدد المتدربين عندك.",
+    currency: "ر.س",
+    per: "/شهر",
+    popular: "الأكثر شيوعًا",
+    cta: "ابدأ الآن",
+    names: { starter: "البداية", growth: "النمو", studio: "الاستوديو" },
+    clients: {
+      starter: "حتى 5 متدربين",
+      growth: "حتى 10 متدربين",
+      studio: "حتى 20 متدرب",
+    },
+    features: [
+      "برامج وروتينات بلا حدود",
+      "ملخّص أسبوعي بالذكاء لكل متدرب",
+      "متابعة تعافي المتدربين",
+      "رسائل وملاحظات فردية",
+      "تطبيق متدربينك مجاني دائمًا",
+    ],
+  },
+}[lang];
+---
+
+<section class="pricing" id="pricing">
+  <div class="container">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 class="section-title">{copy.title}</h2>
+    <p class="subtitle">{copy.subtitle}</p>
+
+    <div class="tiers">
+      {
+        TIERS.map((tier) => (
+          <article class={`tier${tier.popular ? " tier-popular" : ""}`}>
+            {tier.popular ? <span class="badge">{copy.popular}</span> : null}
+            <h3 class="tier-name">{copy.names[tier.key]}</h3>
+            <p class="tier-clients">{copy.clients[tier.key]}</p>
+            <p class="tier-price">
+              <span class="currency">{copy.currency}</span>
+              <span class="amount">{tier.price}</span>
+              <span class="per">{copy.per}</span>
+            </p>
+            <ul class="features">
+              {copy.features.map((f) => (
+                <li>
+                  <svg
+                    class="check"
+                    viewBox="0 0 16 16"
+                    aria-hidden="true"
+                    fill="none"
+                  >
+                    <path
+                      d="M3.5 8.5l3 3 6-7"
+                      stroke="currentColor"
+                      stroke-width="1.6"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                    />
+                  </svg>
+                  <span>{f}</span>
+                </li>
+              ))}
+            </ul>
+            <a
+              class={`tier-cta${tier.popular ? " tier-cta-primary" : ""}`}
+              href={COACH_APP_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              {copy.cta}
+            </a>
+          </article>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<style>
+  .pricing {
+    padding: 88px 0;
+    border-top: 1px solid var(--hair);
+  }
+
+  .eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    margin-bottom: 14px;
+  }
+
+  .subtitle {
+    color: var(--muted);
+    font-size: 16px;
+    max-width: 560px;
+    margin-bottom: 48px;
+    line-height: 1.5;
+  }
+
+  .tiers {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+    align-items: start;
+  }
+
+  @media (min-width: 800px) {
+    .tiers {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .tier {
+    position: relative;
+    background: var(--bone-elevated);
+    border: 1px solid var(--hair);
+    border-radius: var(--radius-card);
+    padding: 32px 28px;
+  }
+
+  .tier-popular {
+    border-color: var(--accent);
+    box-shadow: 0 0 0 1px var(--accent);
+  }
+
+  .badge {
+    position: absolute;
+    top: 0;
+    inset-inline-end: 24px;
+    transform: translateY(-50%);
+    background: var(--accent);
+    color: var(--on-accent);
+    font-size: 11px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    padding: 5px 12px;
+    border-radius: var(--radius-pill);
+  }
+
+  .tier-name {
+    font-family: var(--font-display);
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 4px;
+  }
+
+  .tier-clients {
+    color: var(--muted);
+    font-size: 14px;
+    margin-bottom: 20px;
+  }
+
+  .tier-price {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    margin-bottom: 24px;
+    color: var(--ink);
+  }
+
+  .currency {
+    font-size: 16px;
+    font-weight: 600;
+    color: var(--muted);
+  }
+
+  .amount {
+    font-size: 40px;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+    letter-spacing: -0.02em;
+  }
+
+  .per {
+    font-size: 15px;
+    color: var(--muted);
+  }
+
+  .features {
+    list-style: none;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 28px;
+  }
+
+  .features li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: var(--ink-2);
+    font-size: 14px;
+    line-height: 1.4;
+  }
+
+  .check {
+    width: 16px;
+    height: 16px;
+    margin-top: 2px;
+    color: var(--accent);
+    flex: none;
+  }
+
+  .tier-cta {
+    display: block;
+    text-align: center;
+    border: 1px solid var(--hair);
+    color: var(--ink);
+    padding: 12px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 14px;
+    transition:
+      border-color 160ms ease,
+      background 160ms ease;
+  }
+
+  .tier-cta:hover {
+    border-color: var(--accent);
+    text-decoration: none;
+  }
+
+  .tier-cta-primary {
+    background: var(--accent);
+    border-color: var(--accent);
+    color: var(--on-accent);
+  }
+
+  .tier-cta-primary:hover {
+    background: var(--accent-dim);
+    border-color: var(--accent-dim);
+  }
+</style>

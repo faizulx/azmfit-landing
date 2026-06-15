@@ -1,16 +1,22 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
 import Hero from "../../components/Hero.astro";
-import Features from "../../components/Features.astro";
+import ForCoaches from "../../components/ForCoaches.astro";
+import ForClients from "../../components/ForClients.astro";
+import Pricing from "../../components/Pricing.astro";
 import Footer from "../../components/Footer.astro";
 ---
 
 <BaseLayout
   lang="ar"
-  title="عزم — تمرّن بذكاء. كُل أحسن. تابع كل شيء."
-  description="كل لياقتك في تطبيق واحد. تمارين، تغذية، وتدريب — وتقدّم تشوفه بنفسك."
+  title="عزم للمدربين — درّب متدربين أكثر، بمجهود أقل."
+  description="استوديو المدربين أونلاين: ابنِ البرامج، راجع أسبوع كل متدرب، ودع الذكاء يبيّن لك مين يحتاجك. ومتدربينك يحصلون على تطبيق مجاني."
 >
+  <Header lang="ar" />
   <Hero lang="ar" />
-  <Features lang="ar" />
+  <ForCoaches lang="ar" />
+  <ForClients lang="ar" />
+  <Pricing lang="ar" />
   <Footer lang="ar" />
 </BaseLayout>

@@ -1,16 +1,22 @@
 ---
 import BaseLayout from "../../layouts/BaseLayout.astro";
+import Header from "../../components/Header.astro";
 import Hero from "../../components/Hero.astro";
-import Features from "../../components/Features.astro";
+import ForCoaches from "../../components/ForCoaches.astro";
+import ForClients from "../../components/ForClients.astro";
+import Pricing from "../../components/Pricing.astro";
 import Footer from "../../components/Footer.astro";
 ---
 
 <BaseLayout
   lang="en"
-  title="AzmFit — Train smarter. Eat better. Track everything."
-  description="Your fitness companion. Workouts, meals, coaching, and progress — together in one app."
+  title="AzmFit Coach — Coach more clients, with less busywork."
+  description="The studio for online coaches: build programs, review every client's week, and let AI surface who needs you. Your clients get a free companion app."
 >
+  <Header lang="en" />
   <Hero lang="en" />
-  <Features lang="en" />
+  <ForCoaches lang="en" />
+  <ForClients lang="en" />
+  <Pricing lang="en" />
   <Footer lang="en" />
 </BaseLayout>

@@ -1,0 +1,173 @@
+---
+// ForCoaches — the SaaS pitch. Four capabilities that mirror what the
+// live Coach Studio (app.azmfit.co) actually does: build & assign
+// programs, review each client's logged week, an AI weekly digest per
+// client, and a dashboard that surfaces who needs attention. Closes
+// with a CTA into the web app.
+
+interface Props {
+  lang: "en" | "ar";
+}
+
+const { lang } = Astro.props;
+
+const COACH_APP_URL = "https://app.azmfit.co";
+
+const copy = {
+  en: {
+    eyebrow: "For coaches",
+    title: "A complete coaching studio in your browser",
+    items: [
+      {
+        title: "Build once, assign to everyone",
+        body: "Author a program in the builder, then assign it across your roster in seconds. Tweak per client, update in place — no rebuilding from scratch.",
+      },
+      {
+        title: "Review every client's week",
+        body: "See exactly what each client logged, then leave feedback right on the set. You both see the same data — no screenshots, no back-and-forth.",
+      },
+      {
+        title: "AI reads the week for you",
+        body: "Every client gets a weekly digest that connects the dots across training, nutrition, and recovery — so you walk into each check-in already knowing the story.",
+      },
+      {
+        title: "Know who needs you",
+        body: "Your dashboard flags clients who are slipping, who's at risk, and who's winning — so your attention goes where it matters most.",
+      },
+    ],
+    cta: "Open Coach Studio →",
+  },
+  ar: {
+    eyebrow: "للمدربين",
+    title: "استوديو تدريب متكامل من المتصفح",
+    items: [
+      {
+        title: "ابنِ مرة، وعيّن للجميع",
+        body: "صمّم البرنامج مرة وحدة، وعيّنه لمتدربينك بثوانٍ. عدّل لكل متدرب وحدّث في مكانه — بدون ما تبدأ من الصفر.",
+      },
+      {
+        title: "راجع أسبوع كل متدرب",
+        body: "شوف بالضبط وش سجّله كل متدرب، واترك ملاحظتك على المجموعة مباشرة. كلاكما يرى نفس البيانات — بدون لقطات شاشة ولا تبادل رسائل.",
+      },
+      {
+        title: "الذكاء يقرأ الأسبوع عنك",
+        body: "كل متدرب يحصل على ملخّص أسبوعي يربط بين تمارينه وتغذيته وتعافيه — فتدخل كل متابعة وأنت عارف القصة كاملة.",
+      },
+      {
+        title: "اعرف مين يحتاجك",
+        body: "لوحتك تنبّهك للمتدرب اللي بدأ يتراجع، ومين في خطر، ومين متميّز — فيروح تركيزك للمكان الأهم.",
+      },
+    ],
+    cta: "← افتح استوديو المدرب",
+  },
+}[lang];
+---
+
+<section class="for-coaches" id="coaches">
+  <div class="container">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 class="section-title">{copy.title}</h2>
+
+    <div class="grid">
+      {
+        copy.items.map((item) => (
+          <article class="card">
+            <h3 class="card-title">{item.title}</h3>
+            <p class="card-body">{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    <div class="cta-wrap">
+      <a
+        class="cta"
+        href={COACH_APP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
+        {copy.cta}
+      </a>
+    </div>
+  </div>
+</section>
+
+<style>
+  .for-coaches {
+    padding: 88px 0;
+  }
+
+  .eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .card {
+    background: var(--bone-elevated);
+    border: 1px solid var(--hair);
+    border-radius: var(--radius-card);
+    padding: 28px;
+    transition: border-color 160ms ease;
+  }
+
+  .card:hover {
+    border-color: var(--accent);
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .card-body {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .cta-wrap {
+    margin-top: 36px;
+  }
+
+  .cta {
+    display: inline-flex;
+    align-items: center;
+    background: var(--accent);
+    color: var(--on-accent);
+    padding: 13px 28px;
+    border-radius: var(--radius-pill);
+    font-weight: 600;
+    font-size: 15px;
+    transition: background 160ms ease;
+  }
+
+  .cta:hover {
+    background: var(--accent-dim);
+    text-decoration: none;
+  }
+</style>

@@ -1,6 +1,8 @@
 ---
-// Hero — top fold. Logo + headline + tagline + App Store CTA.
-// Placeholder copy; the user will refine after the scaffold ships.
+// Hero — top fold, coach-first. AzmFit Coach is a SaaS for online
+// coaches; the headline sells that, the primary CTA opens the live
+// web app, and the secondary jumps to pricing. The client-side app is
+// a separate (free) section below, so the hero stays single-audience.
 
 interface Props {
   lang: "en" | "ar";
@@ -8,21 +10,25 @@ interface Props {
 
 const { lang } = Astro.props;
 
+const COACH_APP_URL = "https://app.azmfit.co";
+
 const copy = {
   en: {
-    headline: "Train smarter. Eat better. Track everything.",
+    eyebrow: "AzmFit Coach",
+    headline: "Coach more clients, with less busywork.",
     tagline:
-      "Your fitness companion. Workouts, meals, coaching, and progress — together in one app.",
-    cta: "Download on the App Store",
-    secondaryCta: "Learn more →",
+      "Build programs, review every client's week, and see who needs you — all in one studio. Your clients track workouts, meals, and recovery in a free companion app.",
+    cta: "Get started",
+    secondaryCta: "See pricing →",
     logoAlt: "AzmFit",
   },
   ar: {
-    headline: "تمرّن بذكاء. كُل أحسن. تابع كل شيء.",
+    eyebrow: "عزم للمدربين",
+    headline: "درّب متدربين أكثر، بمجهود أقل.",
     tagline:
-      "كل لياقتك في تطبيق واحد. تمارين، تغذية، وتدريب — وتقدّم تشوفه بنفسك.",
-    cta: "حمِّل التطبيق",
-    secondaryCta: "← اعرف المزيد",
+      "من مكان واحد: ابنِ البرامج، راجع أسبوع كل متدرب، وشوف مين يحتاج اهتمامك. ومتدربينك يتابعون تمارينهم وأكلهم وتعافيهم في تطبيق مجاني.",
+    cta: "ابدأ الآن",
+    secondaryCta: "← شوف الأسعار",
     logoAlt: "عزم",
   },
 }[lang];
@@ -30,32 +36,30 @@ const copy = {
 
 <section class="hero">
   <div class="container hero-inner">
-    {/* Brand wordmark — single asset across light + dark modes.
-        Sized large to anchor the hero, scales down on narrow
-        viewports via clamp() in the .logo CSS below. */}
-    <img
-      class="logo"
-      src="/azm-logo-dark-transparent.png"
-      alt={copy.logoAlt}
-    />
+    {/* Brand wordmark — the Rise tally, sized large to anchor the hero.
+        Reads on the Ink field (cream marks + cobalt stroke). */}
+    <img class="logo" src="/azm-logo-dark-transparent.png" alt={copy.logoAlt} />
+    <p class="eyebrow hero-eyebrow">{copy.eyebrow}</p>
     <h1 class="headline">{copy.headline}</h1>
     <p class="tagline">{copy.tagline}</p>
 
     <div class="cta-row">
-      <!-- App Store badge — replace href with the real listing URL
-           after the app is approved. Placeholder uses the Apple-
-           hosted SVG. -->
-      <a class="cta-primary" href="#" aria-label={copy.cta}>
+      <a
+        class="cta-primary"
+        href={COACH_APP_URL}
+        target="_blank"
+        rel="noopener noreferrer"
+      >
         <span>{copy.cta}</span>
       </a>
-      <a class="cta-secondary" href="#features">{copy.secondaryCta}</a>
+      <a class="cta-secondary" href="#pricing">{copy.secondaryCta}</a>
     </div>
   </div>
 </section>
 
 <style>
   .hero {
-    padding: 96px 0 80px;
+    padding: 72px 0 80px;
     background: linear-gradient(
       180deg,
       var(--bone) 0%,
@@ -68,33 +72,35 @@ const copy = {
     max-width: 760px;
   }
 
-  /* Brand wordmark — sized large to anchor the hero. The PNG has
-   * transparent padding around the tally marks that visually adds
-   * to the gap with the headline below, so we negate it with a
-   * negative bottom margin instead of leaving positive whitespace.
-   * Net effect: bigger mark, tighter rhythm. */
+  /* Brand wordmark — the transparent PNG carries padding around the
+   * tally marks; negate it with a negative bottom margin so the mark
+   * can be large without leaving a big gap to the eyebrow below. */
   .logo {
     display: inline-block;
-    height: clamp(200px, 28vw, 320px);
+    height: clamp(180px, 24vw, 280px);
     width: auto;
-    margin-bottom: -72px;
+    margin-bottom: -56px;
+  }
+
+  .hero-eyebrow {
+    margin-bottom: 14px;
   }
 
   .headline {
     font-family: var(--font-display);
-    font-size: clamp(36px, 6vw, 60px);
+    font-size: clamp(34px, 5.5vw, 56px);
     font-weight: 700;
     line-height: 1.08;
     letter-spacing: -0.02em;
     color: var(--ink);
-    margin-bottom: 24px;
+    margin-bottom: 20px;
   }
 
   .tagline {
     font-size: clamp(16px, 2vw, 19px);
     color: var(--muted);
-    max-width: 580px;
-    margin: 0 auto 40px;
+    max-width: 600px;
+    margin: 0 auto 36px;
     line-height: 1.5;
   }
 
@@ -111,7 +117,7 @@ const copy = {
     align-items: center;
     background: var(--accent);
     color: var(--on-accent);
-    padding: 14px 28px;
+    padding: 14px 30px;
     border-radius: var(--radius-pill);
     font-weight: 600;
     font-size: 15px;

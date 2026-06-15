@@ -1,0 +1,167 @@
+---
+// ForClients — the free companion app your clients use. Reframed from
+// the old end-user "Features" section. The third card used to pitch
+// "Fitness Level", a gamified score that was removed from the app; it's
+// rewritten here to Recovery + readiness, which is what actually ships.
+//
+// Not yet on the App Store, so the store badge reads "coming soon"
+// rather than linking out.
+
+interface Props {
+  lang: "en" | "ar";
+}
+
+const { lang } = Astro.props;
+
+const copy = {
+  en: {
+    eyebrow: "For your clients · Free",
+    title: "A companion app they'll actually open",
+    items: [
+      {
+        title: "Train with momentum",
+        body: "Every workout knows the last one — the right weight is already there, every set is tracked, and progress carries forward without anyone having to remember.",
+      },
+      {
+        title: "Log meals in seconds",
+        body: "No database scrolling. They just type what they ate — “two eggs and toast” — and it's logged with the right calories and macros.",
+      },
+      {
+        title: "Train hard, recover right",
+        body: "Each morning AzmFit turns sleep, heart-rate variability, and a quick check-in into one readiness score — so they know when to push and when to back off.",
+      },
+      {
+        title: "Their week, made clear",
+        body: "A short weekly recap of what worked and what to change — the same picture you see as their coach. Clarity without spreadsheets.",
+      },
+    ],
+    soon: "Coming soon to the App Store",
+  },
+  ar: {
+    eyebrow: "لمتدربينك · مجاني",
+    title: "تطبيق يفتحونه فعلًا",
+    items: [
+      {
+        title: "كمّل من حيث توقّفت",
+        body: "كل تمرين يتذكّر اللي قبله — الوزن المناسب جاهز، وكل مجموعة تتسجّل، والتقدّم يكمل بدون ما أحد يحتاج يحفظ شي.",
+      },
+      {
+        title: "سجّل وجباتك بسرعة",
+        body: "بدون بحث في القوائم. يكتب وش أكل — “بيضتين وتوست” — ويتسجّل بالسعرات والماكروز الصحيحة.",
+      },
+      {
+        title: "تمرّن بقوة، وتعافَ صح",
+        body: "كل صباح يحوّل عزم نومك ونبضك وتقييمك السريع إلى درجة جاهزية وحدة — فتعرف متى تضغط ومتى تخفّف.",
+      },
+      {
+        title: "أسبوعهم بوضوح",
+        body: "ملخّص أسبوعي قصير لِما نجح وما يحتاج تغيير — نفس الصورة اللي تشوفها أنت كمدرب. وضوح بدون جداول.",
+      },
+    ],
+    soon: "قريبًا على App Store",
+  },
+}[lang];
+---
+
+<section class="for-clients" id="app">
+  <div class="container">
+    <p class="eyebrow">{copy.eyebrow}</p>
+    <h2 class="section-title">{copy.title}</h2>
+
+    <div class="grid">
+      {
+        copy.items.map((item) => (
+          <article class="card">
+            <h3 class="card-title">{item.title}</h3>
+            <p class="card-body">{item.body}</p>
+          </article>
+        ))
+      }
+    </div>
+
+    {/* Store badge placeholder — the iOS app isn't live yet, so this is
+        a non-interactive "coming soon" chip rather than a link. Swap to
+        the official Apple badge + listing URL once approved. */}
+    <div class="soon" aria-disabled="true">
+      <span class="soon-mark" aria-hidden="true"></span>
+      <span>{copy.soon}</span>
+    </div>
+  </div>
+</section>
+
+<style>
+  .for-clients {
+    padding: 88px 0;
+    border-top: 1px solid var(--hair);
+    background: var(--bone-elevated);
+  }
+
+  .eyebrow {
+    margin-bottom: 16px;
+  }
+
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(28px, 4vw, 40px);
+    font-weight: 700;
+    line-height: 1.15;
+    letter-spacing: -0.015em;
+    color: var(--ink);
+    max-width: 640px;
+    margin-bottom: 48px;
+  }
+
+  .grid {
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 16px;
+  }
+
+  @media (min-width: 640px) {
+    .grid {
+      grid-template-columns: repeat(2, 1fr);
+    }
+  }
+
+  .card {
+    background: var(--bone);
+    border: 1px solid var(--hair);
+    border-radius: var(--radius-card);
+    padding: 28px;
+  }
+
+  .card-title {
+    font-family: var(--font-display);
+    font-size: 18px;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 8px;
+  }
+
+  .card-body {
+    color: var(--muted);
+    font-size: 15px;
+    line-height: 1.55;
+  }
+
+  .soon {
+    margin-top: 36px;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    border: 1px solid var(--hair);
+    border-radius: var(--radius-pill);
+    padding: 11px 20px;
+    color: var(--ink-2);
+    font-size: 14px;
+    font-weight: 500;
+  }
+
+  .soon-mark {
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex: none;
+  }
+</style>

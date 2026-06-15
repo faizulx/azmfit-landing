@@ -11,11 +11,14 @@ interface Props {
 
 const { lang } = Astro.props;
 
+const COACH_APP_URL = "https://app.azmfit.co";
+
 const copy = {
   en: {
     brand: "AzmFit",
-    tagline: "Train smarter. Eat better. Track everything.",
+    tagline: "The studio for online coaches.",
     nav: {
+      coachApp: "Coach login",
       privacy: "Privacy",
       terms: "Terms",
       contact: "Contact",
@@ -25,8 +28,9 @@ const copy = {
   },
   ar: {
     brand: "عزم",
-    tagline: "تمرّن بذكاء. كُل أحسن. تابع كل شيء.",
+    tagline: "استوديو المدربين أونلاين.",
     nav: {
+      coachApp: "دخول المدربين",
       privacy: "الخصوصية",
       terms: "الشروط",
       contact: "تواصل",
@@ -45,6 +49,7 @@ const copy = {
     </div>
 
     <nav class="nav" aria-label="Footer">
+      <a href={COACH_APP_URL} target="_blank" rel="noopener noreferrer">{copy.nav.coachApp}</a>
       <a href={`/${lang}/privacy/`}>{copy.nav.privacy}</a>
       <a href={`/${lang}/terms/`}>{copy.nav.terms}</a>
       <a href={`/${lang}/contact/`}>{copy.nav.contact}</a>

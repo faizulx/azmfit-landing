@@ -53,6 +53,10 @@ html {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-rendering: optimizeLegibility;
+  /* Smooth in-page jumps; offset anchor targets so the sticky header
+   * (60px) doesn't cover the heading we land on. */
+  scroll-behavior: smooth;
+  scroll-padding-top: 76px;
 }
 
 html[lang="ar"] {
