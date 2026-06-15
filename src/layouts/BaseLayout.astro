@@ -30,6 +30,10 @@ const siteUrl = Astro.site?.toString() ?? "https://azmfit.github.io";
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- Dark-only site — tell the UA up front so the first paint, native
+         form controls, and scrollbars render dark with no light flash. -->
+    <meta name="color-scheme" content="dark" />
+    <meta name="theme-color" content="#211f1c" />
     <meta name="generator" content={Astro.generator} />
     <title>{title}</title>
     {description ? <meta name="description" content={description} /> : null}

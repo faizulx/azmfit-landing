@@ -1,27 +1,30 @@
 /* AzmFit landing — brand tokens + base styles.
  *
- * Tokens mirror `lib/theme/themes.ts` from the app exactly (bone v3.1
- * lightness, ink for dark, cobalt as accent, rust for destructive)
- * so the landing reads as the same brand identity. Light mode is the
- * paper-bone field; dark mode (Ink) is the brand default — same as
- * the app, dark wins on systems set to dark.
+ * Tokens mirror the dark (Ink) theme from the app's `lib/theme/themes.ts`
+ * exactly (ink field, bone type, cobalt as accent, rust for destructive)
+ * so the landing reads as the same brand identity. The landing is
+ * dark-only by design — Ink is the brand default and the Rise wordmark's
+ * cream tally marks only read on a dark field — so there is no light
+ * variant and we do not honour `prefers-color-scheme`.
  */
 
 :root {
-  /* Light mode — bone field, ink type, cobalt accent */
-  --bone: #fbf9f4;
-  --bone-elevated: #ffffff;
-  --bone-container: #f5f1ea;
-  --hair: #e0dad0;
-  --ink: #262320;
-  --ink-2: #494540;
-  --muted: #7c7670;
-  --faint: #b0aaa3;
-  --accent: #2858b8;
-  --accent-dim: #204698;
-  --accent-soft: #dee7f6;
-  --on-accent: #ffffff;
-  --error: #b04f2a;
+  color-scheme: dark;
+
+  /* Dark mode (Ink) — brand default, the only theme */
+  --bone: #211f1c;
+  --bone-elevated: #1a1816;
+  --bone-container: #2d2a26;
+  --hair: #44403c;
+  --ink: #f6f4f0;
+  --ink-2: #d5d1cc;
+  --muted: #94908c;
+  --faint: #5c5854;
+  --accent: #739ce2;
+  --accent-dim: #5c86d2;
+  --accent-soft: #283551;
+  --on-accent: #211f1c;
+  --error: #dc825a;
 
   /* Typography */
   --font-sans:
@@ -35,25 +38,6 @@
   --radius-card: 22px;
   --radius-tile: 16px;
   --radius-pill: 9999px;
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    /* Dark mode (Ink) — brand default */
-    --bone: #211f1c;
-    --bone-elevated: #1a1816;
-    --bone-container: #2d2a26;
-    --hair: #44403c;
-    --ink: #f6f4f0;
-    --ink-2: #d5d1cc;
-    --muted: #94908c;
-    --faint: #5c5854;
-    --accent: #739ce2;
-    --accent-dim: #5c86d2;
-    --accent-soft: #283551;
-    --on-accent: #211f1c;
-    --error: #dc825a;
-  }
 }
 
 * {
