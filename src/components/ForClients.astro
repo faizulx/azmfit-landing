@@ -1,8 +1,9 @@
 ---
-// ForClients — the free companion app your clients use. Reframed from
-// the old end-user "Features" section. The third card used to pitch
-// "Fitness Level", a gamified score that was removed from the app; it's
-// rewritten here to Recovery + readiness, which is what actually ships.
+// ForClients — the companion app your clients use. Reframed from the
+// old end-user "Features" section. Two cards used to lean on AI (the
+// natural-language meal parser and the weekly digest); they're rewritten
+// here to the food-database log and progress charts, which don't depend
+// on AI. The old "Fitness Level" card (a removed feature) became Recovery.
 //
 // Not yet on the App Store, so the store badge reads "coming soon"
 // rather than linking out.
@@ -15,7 +16,7 @@ const { lang } = Astro.props;
 
 const copy = {
   en: {
-    eyebrow: "For your clients · Free",
+    eyebrow: "For your clients",
     title: "A companion app they'll actually open",
     items: [
       {
@@ -23,22 +24,22 @@ const copy = {
         body: "Every workout knows the last one — the right weight is already there, every set is tracked, and progress carries forward without anyone having to remember.",
       },
       {
-        title: "Log meals in seconds",
-        body: "No database scrolling. They just type what they ate — “two eggs and toast” — and it's logged with the right calories and macros.",
+        title: "Log meals and macros",
+        body: "Search a full food database, tap what they ate, and calories and macros add up on their own — no math, no guesswork.",
       },
       {
         title: "Train hard, recover right",
         body: "Each morning AzmFit turns sleep, heart-rate variability, and a quick check-in into one readiness score — so they know when to push and when to back off.",
       },
       {
-        title: "Their week, made clear",
-        body: "A short weekly recap of what worked and what to change — the same picture you see as their coach. Clarity without spreadsheets.",
+        title: "Progress they can see",
+        body: "Weight, measurements, and consistency streaks, charted over time — so progress is obvious and the work feels worth it.",
       },
     ],
     soon: "Coming soon to the App Store",
   },
   ar: {
-    eyebrow: "لمتدربينك · مجاني",
+    eyebrow: "لمتدربينك",
     title: "تطبيق يفتحونه فعلًا",
     items: [
       {
@@ -46,16 +47,16 @@ const copy = {
         body: "كل تمرين يتذكّر اللي قبله — الوزن المناسب جاهز، وكل مجموعة تتسجّل، والتقدّم يكمل بدون ما أحد يحتاج يحفظ شي.",
       },
       {
-        title: "سجّل وجباتك بسرعة",
-        body: "بدون بحث في القوائم. يكتب وش أكل — “بيضتين وتوست” — ويتسجّل بالسعرات والماكروز الصحيحة.",
+        title: "سجّل وجباتك وماكروزك",
+        body: "ابحث في قاعدة أطعمة كاملة، واختر وش أكل، والسعرات والماكروز تتجمّع لحالها — بدون حسابات ولا تخمين.",
       },
       {
         title: "تمرّن بقوة، وتعافَ صح",
         body: "كل صباح يحوّل عزم نومك ونبضك وتقييمك السريع إلى درجة جاهزية وحدة — فتعرف متى تضغط ومتى تخفّف.",
       },
       {
-        title: "أسبوعهم بوضوح",
-        body: "ملخّص أسبوعي قصير لِما نجح وما يحتاج تغيير — نفس الصورة اللي تشوفها أنت كمدرب. وضوح بدون جداول.",
+        title: "تقدّمهم يشوفونه",
+        body: "وزنهم، مقاساتهم، وسلاسل التزامهم — معروضة على رسوم بيانية مع الوقت، فيصير التقدّم واضح ويحسّون إن تعبهم له قيمة.",
       },
     ],
     soon: "قريبًا على App Store",

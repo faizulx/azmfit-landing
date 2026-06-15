@@ -1,8 +1,8 @@
 ---
 // Pricing — the Coach Studio SaaS, priced in three client-count
-// bundles. The client mobile app is free; coaches pay for the studio,
-// and the only axis that changes between tiers is how many active
-// clients the roster allows.
+// bundles. Clients aren't billed here; coaches pay for the studio, and
+// the only axis that changes between tiers is how many active clients
+// the roster allows. Feature set is identical across tiers.
 //
 // Prices live in the TIERS array below (per month). Currency + billing
 // period are set in `copy` — change them in one place.
@@ -27,7 +27,7 @@ const copy = {
     eyebrow: "Pricing",
     title: "Pricing that grows with your roster",
     subtitle:
-      "Your clients use the app for free — you only pay for the studio. Pick the bundle that fits how many clients you coach.",
+      "Every plan is the full studio. The only thing that changes is how many clients you can coach at once.",
     currency: "SAR",
     per: "/mo",
     popular: "Most popular",
@@ -40,17 +40,17 @@ const copy = {
     },
     features: [
       "Unlimited programs & routines",
-      "AI weekly digest per client",
-      "Client recovery monitoring",
-      "1:1 messaging & coach notes",
-      "Your clients' app is always free",
+      "Reusable master program templates",
+      "Weekly review with per-set feedback",
+      "Client recovery & progress tracking",
+      "1:1 messaging & private notes",
     ],
   },
   ar: {
     eyebrow: "الأسعار",
     title: "أسعار تكبر مع عدد متدربينك",
     subtitle:
-      "متدربينك يستخدمون التطبيق مجانًا — تدفع فقط مقابل الاستوديو. اختر الباقة المناسبة لعدد المتدربين عندك.",
+      "كل الباقات نفس الاستوديو كامل. الفرق الوحيد كم متدرب تقدر تدرّب في نفس الوقت.",
     currency: "ر.س",
     per: "/شهر",
     popular: "الأكثر شيوعًا",
@@ -63,10 +63,10 @@ const copy = {
     },
     features: [
       "برامج وروتينات بلا حدود",
-      "ملخّص أسبوعي بالذكاء لكل متدرب",
-      "متابعة تعافي المتدربين",
-      "رسائل وملاحظات فردية",
-      "تطبيق متدربينك مجاني دائمًا",
+      "قوالب برامج رئيسية قابلة لإعادة الاستخدام",
+      "مراجعة أسبوعية مع ملاحظات على كل مجموعة",
+      "متابعة تعافي المتدربين وتقدّمهم",
+      "رسائل وملاحظات خاصة",
     ],
   },
 }[lang];
