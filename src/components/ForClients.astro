@@ -5,14 +5,19 @@
 // here to the food-database log and progress charts, which don't depend
 // on AI. The old "Fitness Level" card (a removed feature) became Recovery.
 //
-// Not yet on the App Store, so the store badge reads "coming soon"
-// rather than linking out.
+// The iOS app is live, so the section closes with Apple's official
+// "Download on the App Store" badge linking to the listing. Apple's
+// badge API has no Arabic variant, so both languages use the English
+// badge (it carries the "App Store" wordmark) with a localized link label.
 
 interface Props {
   lang: "en" | "ar";
 }
 
 const { lang } = Astro.props;
+
+const APP_STORE_URL =
+  "https://apps.apple.com/sa/app/azmfit-coach-tracker/id6762570665";
 
 const copy = {
   en: {
@@ -36,7 +41,7 @@ const copy = {
         body: "Weight, measurements, and consistency streaks, charted over time — so progress is obvious and the work feels worth it.",
       },
     ],
-    soon: "Coming soon to the App Store",
+    store: "Download AzmFit on the App Store",
   },
   ar: {
     eyebrow: "لمتدربينك",
@@ -59,7 +64,7 @@ const copy = {
         body: "وزنهم، مقاساتهم، وسلاسل التزامهم — معروضة على رسوم بيانية مع الوقت، فيصير التقدّم واضح ويحسّون إن تعبهم له قيمة.",
       },
     ],
-    soon: "قريبًا على App Store",
+    store: "حمّل عزم من App Store",
   },
 }[lang];
 ---
@@ -80,13 +85,24 @@ const copy = {
       }
     </div>
 
-    {/* Store badge placeholder — the iOS app isn't live yet, so this is
-        a non-interactive "coming soon" chip rather than a link. Swap to
-        the official Apple badge + listing URL once approved. */}
-    <div class="soon" aria-disabled="true">
-      <span class="soon-mark" aria-hidden="true"></span>
-      <span>{copy.soon}</span>
-    </div>
+    {/* Apple's official "Download on the App Store" badge, linking to the
+        live iOS listing. The image carries the label, so the link's
+        accessible name comes from aria-label and the img alt is empty. */}
+    <a
+      class="store-badge"
+      href={APP_STORE_URL}
+      target="_blank"
+      rel="noopener"
+      aria-label={copy.store}
+    >
+      <img
+        src="/app-store-badge.svg"
+        alt=""
+        width="120"
+        height="40"
+        loading="lazy"
+      />
+    </a>
   </div>
 </section>
 
@@ -145,24 +161,25 @@ const copy = {
     line-height: 1.55;
   }
 
-  .soon {
+  .store-badge {
     margin-top: 36px;
     display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    border: 1px solid var(--hair);
-    border-radius: var(--radius-pill);
-    padding: 11px 20px;
-    color: var(--ink-2);
-    font-size: 14px;
-    font-weight: 500;
+    border-radius: 8px;
+    transition: opacity 0.15s ease;
   }
 
-  .soon-mark {
-    width: 8px;
-    height: 8px;
-    border-radius: 50%;
-    background: var(--accent);
-    flex: none;
+  .store-badge:hover {
+    opacity: 0.85;
+  }
+
+  .store-badge:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+  }
+
+  .store-badge img {
+    display: block;
+    height: 48px;
+    width: auto;
   }
 </style>

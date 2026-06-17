@@ -39,8 +39,10 @@ Dark-only (shipped separately). Bilingual EN + AR, full RTL. Astro.
 
 ## Open follow-ups (not blocking)
 
-- App Store URL → swap the "coming soon" chip for Apple's official
-  badge once the iOS listing is live.
+- [x] App Store URL → swapped the "coming soon" chip for Apple's
+  official white badge (`public/app-store-badge.svg`) linking to the
+  live SA listing (`id6762570665`). Apple's badge API has no Arabic
+  variant, so both languages use the English badge.
 - OG image (1200×630) — `og:image` currently 404s, so social previews
   are broken.
 - App screenshots / device mockups for the client section.
